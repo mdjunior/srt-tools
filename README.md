@@ -43,7 +43,7 @@ The file produced by the tool has the name of the input file, increased by the e
 Examples
 --------
 
-Consider sub.srt file:
+Consider sub.srt file (in portuguese):
 
     1
     00:00:03,084 --> 00:00:05,752

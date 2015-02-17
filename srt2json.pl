@@ -132,7 +132,7 @@ if (!$count) {
 }
 
 # print results (if -v was specified in the program call)
-if ($verbose >= 2) {
+if (defined $verbose && $verbose >= 2) {
     print j(\@array_translated) or die "Can't show results: $ERRNO\n";
 }
 

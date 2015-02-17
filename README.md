@@ -28,6 +28,8 @@ This tool accepts the following parameters:
 - `-i` -- **required if -t is set** -- Subtitle language in the file (input language)
 - `-p` -- **required if -t is set** -- Output language
 
+**Important**: `-c` and `-t` are mutually exclusive. Use one at a time.
+
 For a complete list of parameters used for each language, see [here](https://cloud.google.com/translate/v2/using_rest#language-params)
 
 The file produced by the tool has the name of the input file, increased by the extension `.json`.

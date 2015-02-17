@@ -207,3 +207,9 @@ No files are produced
 
 The generated file is the same as the previous example.
 
+Contributing
+------------
+
+If you have any questions that this documentation does not resolve, or want a feature, open an issue.
+
+If you want to contribute code, please send a pull-request.

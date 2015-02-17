@@ -39,3 +39,171 @@ This tool accepts the following parameters:
 - `-f` -- **required** -- SubRip file
 
 The file produced by the tool has the name of the input file, increased by the extension `.srt`.
+
+Examples
+--------
+
+Consider sub.srt file:
+
+    1
+    00:00:03,084 --> 00:00:05,752
+    É preciso sofrer depois de ter sofrido,
+    
+    2
+    00:00:05,754 --> 00:00:07,887
+    e amar, e mais amar, depois de ter amado.
+    
+    3
+    00:00:07,889 --> 00:00:12,325
+    Se todo animal inspira ternura,
+    
+    4
+    00:00:12,327 --> 00:00:14,894
+    que houve, então, com os homens?
+    
+    5
+    00:00:14,896 --> 00:00:16,696
+    Guimarães Rosa
+
+
+## Simple conversion SubRip to JSON
+
+    ./srt2json.pl -f sub.srt -v
+
+
+    > cat sub.srt.json (pretty printed)
+    [
+        {
+            "end_time": "00:00:05,752",
+            "original": "\u00c3\u0089 preciso sofrer depois de ter sofrido,",
+            "start_time": "00:00:03,084",
+            "subtitle": "\u00c3\u0089 preciso sofrer depois de ter sofrido,"
+        },
+        {
+            "end_time": "00:00:07,887",
+            "original": "e amar, e mais amar, depois de ter amado.",
+            "start_time": "00:00:05,754",
+            "subtitle": "e amar, e mais amar, depois de ter amado."
+        },
+        {
+            "end_time": "00:00:12,325",
+            "original": "Se todo animal inspira ternura,",
+            "start_time": "00:00:07,889",
+            "subtitle": "Se todo animal inspira ternura,"
+        },
+        {
+            "end_time": "00:00:14,894",
+            "original": "que houve, ent\u00c3\u00a3o, com os homens?",
+            "start_time": "00:00:12,327",
+            "subtitle": "que houve, ent\u00c3\u00a3o, com os homens?"
+        },
+        {
+            "end_time": "00:00:16,696",
+            "original": "Guimar\u00c3\u00a3es Rosa",
+            "start_time": "00:00:14,896",
+            "subtitle": "Guimar\u00c3\u00a3es Rosa"
+        }
+    ]
+
+
+## Simple conversion JSON to SubRip
+
+
+    ./json2srt.pl -f sub.srt.json 
+
+
+    > cat sub.srt.json.srt
+    1
+    00:00:03,084 --> 00:00:05,752
+    É preciso sofrer depois de ter sofrido,
+
+    2
+    00:00:05,754 --> 00:00:07,887
+    e amar, e mais amar, depois de ter amado.
+
+    3
+    00:00:07,889 --> 00:00:12,325
+    Se todo animal inspira ternura,
+
+    4
+    00:00:12,327 --> 00:00:14,894
+    que houve, então, com os homens?
+
+    5
+    00:00:14,896 --> 00:00:16,696
+    Guimarães Rosa
+
+
+## Counting characters
+
+    ./srt2json.pl -f sub.srt -c
+    Characters: 158
+
+No files are produced
+
+
+## Translate SubRip file (with verbose)
+
+
+    export GOOGLE_TRANSLATE_API_KEY='example-api-key'
+    ./srt2json.pl -f sub.srt -t -i pt -o en -v
+    -> Checking file permissions (sub.srt)
+    -> Translating 1 of 5
+    -> Translating 2 of 5
+    -> Translating 3 of 5
+    -> Translating 4 of 5
+    -> Translating 5 of 5
+    -> Write results file (sub.srt.json)
+
+    > cat sub.srt.json (pretty printed)
+    [
+        {
+            "end_time": "00:00:05,752",
+            "original": "\u00c3\u0089 preciso sofrer depois de ter sofrido,",
+            "start_time": "00:00:03,084",
+            "subtitle": "You need to suffer after having suffered,"
+        },
+        {
+            "end_time": "00:00:07,887",
+            "original": "e amar, e mais amar, depois de ter amado.",
+            "start_time": "00:00:05,754",
+            "subtitle": "and love, and more love, having loved."
+        },
+        {
+            "end_time": "00:00:12,325",
+            "original": "Se todo animal inspira ternura,",
+            "start_time": "00:00:07,889",
+            "subtitle": "If every animal inspires tenderness,"
+        },
+        {
+            "end_time": "00:00:14,894",
+            "original": "que houve, ent\u00c3\u00a3o, com os homens?",
+            "start_time": "00:00:12,327",
+            "subtitle": "What happened, then, with men?"
+        },
+        {
+            "end_time": "00:00:16,696",
+            "original": "Guimar\u00c3\u00a3es Rosa",
+            "start_time": "00:00:14,896",
+            "subtitle": "Guimar\u00c3\u00a3es Rosa"
+        }
+    ]
+
+## Translate SubRip file (with super verbose)
+
+
+    export GOOGLE_TRANSLATE_API_KEY='example-api-key'
+    ./srt2json.pl -f sub.srt -t -i pt -o en -v -v
+    -> Checking file permissions (sub.srt)
+    -> Translating 1 of 5
+    -> Translating 2 of 5
+    -> Translating 3 of 5
+    -> Translating 4 of 5
+    -> Translating 5 of 5
+    -> Write results file (sub.srt.json)
+    
+    [{"start_time":"00:00:03,084","end_time":"00:00:05,752","subtitle":"You need to suffer after having suffered,","original":"Ã preciso sofrer depois de ter sofrido,"},{"subtitle":"and love, and more love, having loved.","original":"e amar, e mais amar, depois de ter amado.","end_time":"00:00:07,887","start_time":"00:00:05,754"},{"start_time":"00:00:07,889","subtitle":"If every animal inspires tenderness,","original":"Se todo animal inspira ternura,","end_time":"00:00:12,325"},{"start_time":"00:00:12,327","end_time":"00:00:14,894","subtitle":"What happened, then, with men?","original":"que houve, entÃ£o, com os homens?"},{"end_time":"00:00:16,696","original":"GuimarÃ£es Rosa","subtitle":"GuimarÃ£es Rosa","start_time":"00:00:14,896"}]
+
+
+The generated file is the same as the previous example.
+

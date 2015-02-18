@@ -1,5 +1,5 @@
 requires 'Mojolicious';
 requires 'Mojo::UserAgent';
-requires 'Mojo::JSON';
+requires 'JSON';
 requires 'IO::Socket::SSL';
 requires 'Readonly';

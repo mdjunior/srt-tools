@@ -8,7 +8,7 @@ use English qw( -no_match_vars );
 use Getopt::Long;
 
 use Mojolicious;
-use Mojo::JSON qw(j);
+use JSON;
 
 our $VERSION = 0.1;
 
@@ -34,7 +34,7 @@ my $content;
 }
 
 # parsing content (in a perl structure)
-my $array = j($content);
+my $array = JSON->new->utf8->decode($content);
 
 # generate SRT
 my $srt;
